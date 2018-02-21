@@ -1,0 +1,79 @@
+{
+  "name": "react-sandbox",
+  "version": "1.0.0",
+  "description": "react sandbox",
+  "main": "gulpfile.babel.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbarahona/react-sandbox.git"
+  },
+  "keywords": [
+    "react",
+    "sandbox"
+  ],
+  "author": "Willmer Barahona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wbarahona/react-sandbox/issues"
+  },
+  "homepage": "https://github.com/wbarahona/react-sandbox#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^15.2.0",
+    "browserify-shim": "^3.8.14",
+    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-vue": "^4.2.2",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.2",
+    "gulp": "^3.9.1",
+    "gulp-combine-mq": "^0.4.0",
+    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-connect": "^5.2.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-eslint": "^4.0.2",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^8.1.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "imagemin-pngquant": "^5.0.1",
+    "jquery": "^3.3.1",
+    "path": "^0.12.7",
+    "pretty-hrtime": "^1.0.3",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "stringify": "^5.2.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "vueify": "^9.4.1",
+    "watchify": "^3.10.0",
+    "yargs": "^11.0.0",
+    "youtube-api-search": "0.0.5"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {},
+  "browser": {
+    "react": "./node_modules/react/umd/react.production.min.js",
+    "reactdom": "./node_modules/react-dom/cjs/react-dom.production.min.js"
+  }
+}

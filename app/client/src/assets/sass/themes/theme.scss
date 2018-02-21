@@ -1,0 +1,64 @@
+html {
+    // font-size: 62.5%;
+    font-size: 16px;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font: normal 500 1.5rem/1.3 arial;
+    color: color(wetasphalt);
+
+    * {
+        box-sizing: border-box;
+
+        &:active, &:hover {
+            box-sizing: border-box;
+        }
+        &::before, &::after {
+            box-sizing: border-box;
+        }
+        &::selection {
+            color: color(silver);
+            background: color(wetasphalt);
+        }
+    }
+}
+
+.video-list {
+    .thumb-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.video-box {
+    position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+    height: 0;
+    
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .video-loading {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.video-info {
+    big {
+        font-size: 2rem;
+        line-height: 3rem;
+        text-transform: capitalize;
+    }
+}
+  
