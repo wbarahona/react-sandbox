@@ -1,18 +1,24 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const VideoListItem = ({ video }) => {
+const VideoListItem = ({ video, onVideoSelect }) => {
     const imageUrl = video.snippet.thumbnails.default.url;
     const title = video.snippet.title;
+
+    const videoClicked = (e) => {
+        e.preventDefault();
+
+        return onVideoSelect(video);
+    };
 
     return (
         <li className="list-group-item">
             <div className="video-list media row">
                 <div className="col-4 thumb-wrap">
-                    <a href=""><img src={imageUrl} alt=""/></a>
+                    <a href="#" onClick={ videoClicked }><img src={imageUrl} alt=""/></a>
                 </div>
                 <div className="col-8">
-                    <p><a href=""><strong>{title}</strong></a></p>
+                    <p><a href="#" onClick={ videoClicked }><strong>{title}</strong></a></p>
                 </div>
             </div>
         </li>
@@ -20,7 +26,8 @@ const VideoListItem = ({ video }) => {
 };
 
 VideoListItem.propTypes = {
-    video: propTypes.object
+    video: propTypes.object,
+    onVideoSelect: propTypes.func
 };
 
 export default VideoListItem;

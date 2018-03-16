@@ -24,11 +24,51 @@ body {
     }
 }
 
+.brand-name-wrap {
+    img {
+        display: inline-block;
+        vertical-align: top;
+        width: 3rem;
+        margin-right: 1rem;
+    }
+    span {
+        display: inline-block;
+        vertical-align: top;
+        text-align: center;
+
+        span {
+            display: block;
+            color: color(wetasphalt);
+        }
+    }
+    .brand-name {
+        color: crimson;
+        font-weight: bold;
+    }
+    .brand-slug {
+        font-size: .85rem;
+    }
+}
+
+.search-form-wrap {
+    margin-top: 1rem;
+}
+
 .video-list {
     .thumb-wrap {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        a {
+            display: inline-block;
+            width: 100%;
+        }
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
     }
 }
 
@@ -59,6 +99,12 @@ body {
         font-size: 2rem;
         line-height: 3rem;
         text-transform: capitalize;
+    }
+}
+
+.list-group-item {
+    &.active, &:active, &:hover {
+        background-color: lighten($color: color(silver), $amount: 10);
     }
 }
   

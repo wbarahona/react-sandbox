@@ -2,7 +2,7 @@
     "parserOptions": {
         "parser": "babel-eslint",
         "ecmaVersion": 6,
-        "sourceType": "module",
+        "sourceType": "module"
     },
     "env": {
       "browser": true,
@@ -20,7 +20,7 @@
       "handlebars": false,
       "React": false
     },
-    extends: [
+    "extends": [
       "eslint:recommended",
       "plugin:vue/recommended", # or 'plugin:vue/base'
       "plugin:react/recommended"

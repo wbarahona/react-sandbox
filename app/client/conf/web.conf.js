@@ -43,8 +43,8 @@ module.exports = {
         },
         authkeys: {
             facebookapps: [
-                {appid: '',appsecret: '', clientToken: ''},
-                {appid: '',appsecret: '', clientToken: ''}
+                {appid: '', appsecret: '', clientToken: ''},
+                {appid: '', appsecret: '', clientToken: ''}
             ],
             twitterapps: '',
             google: {
