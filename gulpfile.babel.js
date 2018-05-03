@@ -10,8 +10,6 @@ import { argv } from 'yargs';
 import prettyTime from 'pretty-hrtime';
 import sourcemaps from 'gulp-sourcemaps';
 import gutil from 'gulp-util';
-import rev from 'gulp-rev';
-import path from 'path';
 
 // front end server related
 import connect from 'gulp-connect';
@@ -20,7 +18,6 @@ import connect from 'gulp-connect';
 import htmlmin from 'gulp-htmlmin';
 import stringify from 'stringify';
 import handlebars from 'gulp-compile-handlebars';
-import fs from 'fs';
 
 // scripts and lint related
 import eslint from 'gulp-eslint';
@@ -31,7 +28,6 @@ import buffer from 'vinyl-buffer';
 import source from 'vinyl-source-stream';
 import uglify from 'gulp-uglify';
 import babelify from 'babelify';
-import vueify from 'vueify';
 
 // Styles related
 import sass from 'gulp-sass';
@@ -120,7 +116,7 @@ const bundleScript = (file) => {
     const opts = Object.assign({}, watchify.args, {
         debug: true,
         entries: file,
-        transform: [stringify, vueify]
+        transform: [stringify]
     });
     const lint = (src) => {
         return gulp.src(src)
@@ -134,8 +130,7 @@ const bundleScript = (file) => {
             .on('error', gutil.log.bind(gutil, '>>> Bundling error!'))
             .pipe(source(file))
             .pipe(buffer())
-            // .pipe(rev())
-            .pipe(uglify({ mangle: {reserved: ['vue']} }))
+            .pipe(uglify({ mangle: {reserved: ['react']} }))
             .pipe(sourcemaps.init({ loadMaps: true }))
             .pipe(sourcemaps.write('./maps'))
             .pipe(rename({
@@ -143,11 +138,6 @@ const bundleScript = (file) => {
                 extname: '.min.js'
             }))
             .pipe(gulp.dest(internals.paths.dist.scripts))
-            // .pipe(rev.manifest({
-            //     base: `${ internals.paths.project.root }/`,
-            //     merge: true // merge with the existing manifest if one exists
-            // }))
-            // .pipe(gulp.dest(`${ internals.paths.project.root }/`))
             .pipe(notify({
                 title: 'Finished: BUNDLING',
                 message: `${ file }`
@@ -173,6 +163,8 @@ gulp.task('scripts', () => {
 
     glob(`${ internals.paths.dev.scripts }/**/*.js`,
         {'ignore': [
+            `${ internals.paths.dev.scripts }/reducers/**/*`,
+            `${ internals.paths.dev.scripts }/containers/**/*`,
             `${ internals.paths.dev.scripts }/components/**/*`,
             `${ internals.paths.dev.scripts }/modules/**/*`,
             `${ internals.paths.dev.scripts }/libs/**/*`
@@ -205,13 +197,7 @@ gulp.task('sass', () => {
         .pipe(sourcemaps.init())
         .pipe(sourcemaps.write())
         .pipe(rename('styles.min.css'))
-        // .pipe(rev())
         .pipe(gulp.dest(internals.paths.dist.styles))
-        // .pipe(rev.manifest({
-        //     base: `${ internals.paths.project.root }/thispath`,
-        //     merge: true // merge with the existing manifest if one exists
-        // }))
-        // .pipe(gulp.dest(`${ internals.paths.project.root }/thispath`))
         .pipe(connect.reload());
 });
 
@@ -244,7 +230,7 @@ gulp.task('fonts', () => {
 // Process templates
 // -----------------------------------------------------------------------
 gulp.task('templates', () => {
-    internals.web.rev = (argv.production) ? JSON.parse(fs.readFileSync(`${ internals.paths.dist.root }/assets/rev-manifest.json`, 'utf8')) : internals.web.site.assets;
+    internals.web.rev = internals.web.site.assets;
 
     return gulp.src([`${ internals.paths.dev.hbs.root }/**/*.hbs`, `!${ internals.paths.dev.hbs.partials }/**/*.hbs`])
         .pipe(handlebars(internals.web, hbs.options))
@@ -254,18 +240,6 @@ gulp.task('templates', () => {
         .pipe(htmlmin({collapseWhitespace: true, removeComments: true}))
         .pipe(gulp.dest(internals.paths.dist.root))
         .pipe(connect.reload());
-});
-
-//
-// Process revision over the assets
-// -----------------------------------------------------------------------
-gulp.task('rev', () => {
-    // src/dest paths have to be relative to project path, dunno why can't use internals.paths
-    return gulp.src(['dist/assets/scripts/app.min.js', 'dist/assets/css/styles.min.css'], {base: path.join(process.cwd(), 'dist/assets')})
-        .pipe(rev())
-        .pipe(gulp.dest('dist/assets'))
-        .pipe(rev.manifest())
-        .pipe(gulp.dest('dist/assets'));
 });
 
 //
@@ -281,4 +255,4 @@ gulp.task('watch', () => {
 //
 // Default Task
 // -----------------------------------------------------------------------
-gulp.task('default', ['connect', 'scripts', 'sass', 'rev', 'images', 'fonts', 'templates', 'watch']);
+gulp.task('default', ['connect', 'scripts', 'sass', 'images', 'fonts', 'templates', 'watch']);

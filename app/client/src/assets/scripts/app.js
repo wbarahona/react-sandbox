@@ -6,6 +6,7 @@ import ytsearch from 'youtube-api-search-promise';
 import webconf from '../../../conf/web.conf';
 import utils from 'utils';
 
+// Components
 import SearchBar from './components/search';
 import VideoDetail from './components/videodetail';
 import VideoList from './components/videolist';
@@ -70,6 +71,9 @@ class App extends Component {
                     <VideoList
                         onVideoSelect={ selectedVideo => this.setState({ selectedVideo }) }
                         videos={ this.state.results } />
+                </div>
+                <div className="row">
+                    {/* Comment list here */}
                 </div>
             </div>
         );
